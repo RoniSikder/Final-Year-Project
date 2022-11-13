@@ -1,0 +1,19 @@
+form-control{
+    border: none;
+}
+.cont{
+    display: flex;
+    justify-content: space-between;
+}
+.blank_space{
+    height: 100vh;
+    width: 70vw;
+}
+.login{
+    height: 100vh;
+    width: 30vw;
+}
+img{
+    height: 100%;
+    width: 70vw;
+}

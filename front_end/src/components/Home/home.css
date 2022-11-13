@@ -1,0 +1,52 @@
+.home-background {
+    /* height: 100%;
+    width: 100%; */
+    /* background-size: cover; */
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url("../images/foodImage2.jpg");
+    /* background-image: url("../images/foodImage2.jpg"); */
+    background-size: cover;
+    min-height: 100vh;
+    color: white;
+}
+
+.text {
+    padding-top: 300px;
+    padding-left: 200px;
+}
+
+.tab-cards {
+    padding: 80px;
+    margin: 0 100px;
+    justify-content: space-evenly;
+}
+
+.top-vendors {
+    padding: 20px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.vendor-profile img {
+    height:200px;
+    width:200px;
+    border-radius: 100px;
+}
+
+.today-special {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("../images/bg-kitchen.jpg");
+    color: white;
+    background-size: cover;
+    min-height: 80vh;
+    padding-top: 30px;
+    padding: 20px;
+}
+
+.special-foods {
+    margin-top: 90px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.special-food img{
+    box-shadow: rgba(255, 255, 255, 0.623) 0px 18px 50px -10px;
+}
