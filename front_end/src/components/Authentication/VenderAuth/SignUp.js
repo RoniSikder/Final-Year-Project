@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import "../All_Style.css"
 
-export const SignUp = ({setDis}) => {
+export const SignUp = ({ setDis }) => {
   const navi = useNavigate()
   let [hold, sethold] = useState({
     email: "",
     pass: "",
     namea: "",
-    contact:"",
-    adde:""
+    contact: "",
+    adde: ""
   })
   let update = e => {
     sethold({ ...hold, [e.target.name]: e.target.value });
@@ -19,9 +19,13 @@ export const SignUp = ({setDis}) => {
   let url = "http://localhost:5700/register"
   let display = (e) => {
     e.preventDefault();
-    const { email, pass, namea , contact , adde } = hold;
+    const { email, pass, namea, contact, adde } = hold;
     axios.post(url, hold)
-      .then((res) => { alert(res.data.massege) })
+      .then(res => {
+        let holder = console.log(res.data.code);
+        navi("/vender",{state:{id:holder}});
+      })
+      .catch(err => { alert(err) })
   }
   return (
     <form style={{ padding: "20px", borderRadius: "10px" }}>
@@ -29,31 +33,31 @@ export const SignUp = ({setDis}) => {
       <div className="row mb-3">
         <div>Enter Your Email</div>
         <div>
-          <input type="email" className="form-control" name='email' value={hold.email} onChange={update}  required />
+          <input type="email" className="form-control" name='email' value={hold.email} onChange={update} required />
         </div>
       </div>
       <div className="row mb-3">
         <div>Create An Password</div>
         <div>
-          <input type="password" className="form-control" id="inputPassword3" name='pass' value={hold.pass} onChange={update}  required />
+          <input type="password" className="form-control" id="inputPassword3" name='pass' value={hold.pass} onChange={update} required />
         </div>
       </div>
       <div className="row mb-3">
         <div>Enter Your Name</div>
         <div>
-          <input type="email" className="form-control" name='namea' value={hold.namea} onChange={update}  required />
+          <input type="email" className="form-control" name='namea' value={hold.namea} onChange={update} required />
         </div>
       </div>
       <div className="row mb-3">
         <div>Enter Service Contact Number</div>
         <div>
-          <input type="number" className="form-control" name='contact' value={hold.contact} onChange={update}  required />
+          <input type="number" className="form-control" name='contact' value={hold.contact} onChange={update} required />
         </div>
       </div>
       <div className="row mb-3">
         <div>Enter Full Address</div>
         <div>
-          <input type="text" className="form-control" name='adde' value={hold.adde} onChange={update}  required />
+          <input type="text" className="form-control" name='adde' value={hold.adde} onChange={update} required />
         </div>
       </div>
       <button type="submit" className="btn btn-success" onClick={display}>Register</button>

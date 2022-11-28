@@ -15,8 +15,9 @@ export const LogIn = ({ setare , setDis }) => {
     const { email, pass } = hold;
     axios.post('http://localhost:5700/login', hold)
       .then(res => {
-        alert(res.data.message)
-        setare(res.data.checker)
+        let username= res.data.username;
+        let holder = res.data.code;
+        navi(`../vender/${holder}`, {state:{username:username}});
       })
       .catch(err => { alert(err) })
     console.log(hold);

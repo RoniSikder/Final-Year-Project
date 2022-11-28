@@ -7,13 +7,16 @@ import Shop_Details from './components/Shop_Details';
 import Authentication from "./components/Authentication"
 import {LogIn} from "./components/Authentication/VenderAuth/LogIn"
 import {SignUp} from "./components/Authentication/VenderAuth/SignUp"
+import Dashboard from './components/Dashboard'
 
 function App() {
   let [temp,setTemp]=useState(null);
+  let [author,setAuthor]=useState(null);
+  function decide(){
+    author === null ? <LogIn/> : <Dashboard author={author} setAuthor={setAuthor}/>
+  }
   return (
     <div className="App">
-      {/* <Home/> */}
-      {/* <Blogs/> */}
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/auth' element={<Authentication/>}/>
@@ -22,6 +25,7 @@ function App() {
         <Route path='/shop_details' element={<Shop_Details temp={temp} />} />
         <Route path='/vender_login' element={<LogIn/>}/>
         <Route path='/vender_signup' element={<SignUp/>}/>
+        <Route path='/vender/:id' element={<Dashboard/>}/>
       </Routes>
     </div>
   );
