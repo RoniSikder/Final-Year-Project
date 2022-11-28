@@ -53,7 +53,7 @@ app.post('/register', (req, res) => {
                     res.send({ message: "Error occurs" });
                 }
                 else {
-                    res.send({ message: "Successfully Registered", code: user._id })
+                    res.send({ message: "Successfully Registered", code: noex._id })
                 }
             })
         }

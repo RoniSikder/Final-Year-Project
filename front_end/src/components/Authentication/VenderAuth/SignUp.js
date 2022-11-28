@@ -22,8 +22,10 @@ export const SignUp = ({ setDis }) => {
     const { email, pass, namea, contact, adde } = hold;
     axios.post(url, hold)
       .then(res => {
-        let holder = console.log(res.data.code);
-        navi("/vender",{state:{id:holder}});
+        let username= res.data.username;
+        let holder = res.data.code;
+        console.log(holder);
+        navi(`../vender/${holder}`, {state:{username:username}});
       })
       .catch(err => { alert(err) })
   }

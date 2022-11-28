@@ -17,8 +17,8 @@ const OrderPage_Landing = ({setTemp}) => {
                 <div className="shopList">
                     {
                         shops.map(x =>
-                            <div onClick={()=>{navigation("/shop_details");setTemp(x.id)}} className="card" style={{width: "18rem"}}>
-                                <img src={x.shop_image} className="card-img-top" alt="..." style={{height: "400px"}}/>
+                            <div onClick={()=>{navigation("/shop_details");setTemp(x.id)}} className="card" style={{width: "23rem"}}>
+                                <img src={x.shop_image} className="card-img-top" alt="..." style={{height: "300px"}}/>
                                 <div className="card-body">
                                     <h5 className="card-text">{x.namea}</h5>
                                     <p className="card-text">{x.address}</p>

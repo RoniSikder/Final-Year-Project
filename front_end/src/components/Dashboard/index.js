@@ -7,8 +7,8 @@ import image from '../images/pexels-alexander-mils-2103949.jpg'
 function Dashboard() {
     const { id } = useParams();
     let loca = useLocation()
-    console.log(loca.state.username)
-    console.log(id);
+    // console.log(loca.state.username)
+    // console.log(id);
     const navi = useNavigate()
     let [hold, sethold] = useState({
         food_name: "",
@@ -39,8 +39,8 @@ function Dashboard() {
                     <header>Admin</header>
                     <ul>
                         <li><a href="#"><i className="fas fa-qrcode"></i>Dashboard</a></li>
-                        <li><a href="#"><i className="fas fa-link"></i>Settings</a></li>
-                        <li><a href="#"><i className="fas fa-stream"></i>Analytics</a></li>
+                        <li><a href="#"><i className="fas fa-link"></i>Add Dishes</a></li>
+                        <li><a href="#"><i className="fas fa-stream"></i>Log Out</a></li>
                     </ul>
                 </div>
                 <section className="body" style={{ backgroundImage: `url(${image})` }}>
