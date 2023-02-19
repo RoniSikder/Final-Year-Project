@@ -1,7 +1,8 @@
 const ex = require("express")
 const mongo = require("mongoose");
 const cors = require("cors");
-const app = ex()
+const app = ex();
+const vender_otp = require("./OTP_Validation");
 app.use(ex.json())
 app.use(cors())
 let port = 5700
@@ -34,47 +35,70 @@ let user = new mongo.Schema({
 
 let vold = new mongo.model("Vender", user)
 
-app.post('/register', (req, res) => {
-    const { email, pass, namea, contact, vender_address } = req.body
-    vold.findOne({ email: email }, (alex, noex) => {
-        if (noex) {
-            res.send({ message: "User Already Exist" })
-        }
-        else {
-            let noex = new vold({
-                email,
-                pass,
-                namea,
-                contact,
-                vender_address
-            })
-            noex.save((err) => {
-                if (err) {
-                    res.send({ message: "Error occurs" });
-                }
-                else {
-                    res.send({ message: "Successfully Registered", code: noex._id })
-                }
-            })
-        }
-    })
+let otpa = 0;
+app.post('/login', (req, res) => {
+    const { email , pass } = req.body;
+    console.log("l")
+    console.log(email)
+    otpa = vender_otp(email);
 })
 
-app.post('/login', (req, res) => {
-    const { email, pass } = req.body
-    vold.findOne({ email: email }, (err, user) => {
-        if (user) {
-            if (pass === user.pass) {
-                res.send({ message: "Log In Successfull", code: user._id, username: user.namea })
+app.post('/register', (req, res) => {
+    console.log("r")
+    const { email, pass, namea, contact, adde } = req.body;
+    otpa = vender_otp(email);
+})
+
+app.post('/register/otp_validation', (req, res) => {
+    const { email, pass, namea, contact, vender_address, otp } = req.body
+    console.log("ro")
+    if (otp === otp) {
+        vold.findOne({ email: email }, (alex, noex) => {
+            if (noex) {
+                res.send({ message: "User Already Exist" })
             }
             else {
-                res.send({ message: "Fuck Off! Your not a Autherised User Dump Asshole!" })
+                let noex = new vold({
+                    email,
+                    pass,
+                    namea,
+                    contact,
+                    vender_address
+                })
+                noex.save((err) => {
+                    if (err) {
+                        res.send({ message: "Error occurs" });
+                    }
+                    else {
+                        res.send({ message: "Successfully Registered", code: noex._id })
+                    }
+                })
             }
-        }
-        else {
-            res.send({ message: "No User Exist! Please Sign Up First" })
-        }
-    })
+        })
+    }
+})
+
+app.post('/login/otp_validation', (req, res) => {
+    console.log("lo")
+    console.log(otpa);
+    const { email, pass, otp } = req.body
+    if (otp === otp) {
+        console.log("pass");
+        vold.findOne({ email: email })
+            .then((user) => {
+                if (user) {
+                    if (pass === user.pass) {
+                        res.send({ message: "Log In Successfull", code: user._id, username: user.namea })
+                    }
+                    else {
+                        res.send({ message: "Fuck Off! Your not a Autherised User Dump Asshole!" })
+                    }
+                }
+            })
+            .catch((err) => {
+                res.send({ message: "No User Exist! Please Sign Up First" })
+            })
+    }
 })
 
 app.post('/addvenderManu/:id', (req, res) => {
@@ -85,15 +109,15 @@ app.post('/addvenderManu/:id', (req, res) => {
             food_manu: {
                 food_name: food_name,
                 food_des: food_des,
-                food_price: food_price 
+                food_price: food_price
             }
         }
-    }, (err , resa) => {
-        if(err){
-            res.send({message:"sorry please try again later"})
+    }, (err, resa) => {
+        if (err) {
+            res.send({ message: "sorry please try again later" })
         }
-        else{
-            res.send({message:"updated"})
+        else {
+            res.send({ message: "updated" })
         }
     })
 })

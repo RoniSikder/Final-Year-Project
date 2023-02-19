@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import "../All_Style.css"
 
-export const SignUp = ({ setDis }) => {
+export const SignUp = ({ setAuthen,setDis }) => {
   const navi = useNavigate()
   let [hold, sethold] = useState({
     email: "",
@@ -21,11 +21,9 @@ export const SignUp = ({ setDis }) => {
     e.preventDefault();
     const { email, pass, namea, contact, adde } = hold;
     axios.post(url, hold)
-      .then(res => {
-        let username= res.data.username;
-        let holder = res.data.code;
-        console.log(holder);
-        navi(`../vender/${holder}`, {state:{username:username}});
+      .then((res) => {
+        setAuthen({ email, pass, namea, contact, adde });
+        navi("/signup_otp");
       })
       .catch(err => { alert(err) })
   }

@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import "../All_Style.css"
 
-export const LogIn = ({ setare , setDis }) => {
-  const navi = useNavigate()
+export const LogIn = ({ setAuthen , setDis }) => {
+  const navi = useNavigate();
   let [hold, sethold] = useState({
     email: "",
     pass: ""
@@ -14,13 +14,12 @@ export const LogIn = ({ setare , setDis }) => {
     e.preventDefault();
     const { email, pass } = hold;
     axios.post('http://localhost:5700/login', hold)
-      .then(res => {
-        let username= res.data.username;
-        let holder = res.data.code;
-        navi(`../vender/${holder}`, {state:{username:username}});
+      .then((res) => {
+        setAuthen({email,pass});
+        navi("/login_otp");
+        console.log(hold);
       })
       .catch(err => { alert(err) })
-    console.log(hold);
   }
   let control = (e) => {
     sethold({ ...hold, [e.target.name]: e.target.value })
@@ -45,7 +44,7 @@ export const LogIn = ({ setare , setDis }) => {
       <button className="btn btn-success" onClick={containt}>Log In</button>
       <div><span>or</span></div>
       <span>Dont Have an Account </span>
-      <button type="submit" className="btn btn-success" onClick={() => { setDis(2) }}>Sign Up</button>
+      <button type="submit" className="btn btn-success" onClick={() => { setDis(2)}}>Sign Up</button>
     </form>
   )
 }
